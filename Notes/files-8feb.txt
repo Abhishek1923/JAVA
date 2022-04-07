@@ -1,0 +1,66 @@
+import java.io.*;
+class FileISTest{
+	public static void main(String[] args)throws Exception{
+			FileInputStream fis = new FileInputStream("test.txt");
+			int i;
+			while((i =fis.read())!=-1){	
+			System.out.print((char)i);	
+			}			
+	}
+}
+------------------------------------------
+
+import java.io.*;
+class FileISTest{
+	public static void main(String[] args)throws Exception{
+			FileOutputStream fos = new FileOutputStream("test.txt",true);
+			fos.write('a');
+			fos.write('b');
+			
+	}
+}
+------------------------------------------------------
+import java.io.*;
+class Student implements Serializable{
+	int rollno;
+	String name;
+	transient int age;
+	Student(int rollno, String name, int age){
+		this.rollno=rollno;
+		this.name=name;
+		this.age=age;
+	}
+}
+class SerialAndDeSerialTest{
+	static void serial()throws Exception{
+		Student s = new Student(11,"Neelu",35);
+		FileOutputStream fos = new FileOutputStream("stude.txt");
+		ObjectOutputStream oos= new ObjectOutputStream(fos);
+		oos.writeObject(s);
+		System.out.println("Serialzation done !!!");	
+	}
+	public static void main(String[] args)throws Exception{
+		FileInputStream fis = new FileInputStream("stude.txt");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Object o=ois.readObject();
+		Student s = (Student)o;
+		System.out.println("Deatails: "+s.rollno+" "+s.name+" "+s.age);
+	}
+}
+----------------------------------------------
+import java.io.*;
+class FileTest{
+	public static void main(String[] args){
+		File f = new File("test.txt");
+		System.out.println("Exists "+f.exists());
+		System.out.println("Getname "+f.getName());
+		System.out.println("length "+f.length());
+		System.out.println("can read "+f.canRead());
+		System.out.println("can write "+f.canWrite());
+		System.out.println("get path "+f.getPath());
+		System.out.println("absolute path "+f.getAbsolutePath());
+		System.out.println("set read only "+f.setReadOnly());
+		System.out.println("can write "+f.canWrite());
+	}
+}
+-------------------------------------------------

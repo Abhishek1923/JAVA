@@ -1,0 +1,210 @@
+import java.lang.reflect.*;
+class A{
+public static void m1(int i)throws InterruptedException,ArithmeticException{}
+String m2(String s, float f)throws NullPointerException{
+	return "OK";
+}
+void m3(double d){}
+}
+class MethodExample01{
+	public static void main(String[] args)throws ClassNotFoundException{		
+		Class c = Class.forName("A");
+		String s1 = c.getName();
+		System.out.println("Class Name "+s1);
+		
+		Method[] mthd = c.getDeclaredMethods();
+		for(Method m1: mthd){
+			System.out.println("Method name "+m1.getName());
+			System.out.println("Return Type "+m1.getReturnType().getName());
+			int i = m1.getModifiers();
+			System.out.println("Access Modifier "+Modifier.toString(i));
+			Class[] cls1 = m1.getParameterTypes();
+			for(Class c1: cls1){
+				System.out.println("Parameter  "+c1.getName());
+			}//inner for
+			
+			Class[] cls2 = m1.getExceptionTypes();
+			for(Class c2: cls2){
+				System.out.println("Exception "+c2.getName());
+			
+			}//innner for
+			
+			System.out.println("----------------------");
+			
+		}//for
+		
+	}
+}
+-----------------------------------------------
+import java.lang.reflect.*;
+
+class A{}
+interface I1{}
+interface I2{}
+
+abstract class Test extends A  implements I1,I2{
+	
+}
+
+class ModifiersTest{
+	public static void main(String[] args){
+		Class c1 = Test.class;
+		String s1 = c1.getName();
+		System.out.println("Class Name "+s1);
+		Class c2 = c1.getSuperclass();
+		String s2 = c2.getName();
+		System.out.println("Super class Name "+s2);
+		Class[] c3 = c1.getInterfaces();
+		for(Class c: c3){
+			System.out.println("Interface "+c.getName());
+		}
+		
+		int i = c1.getModifiers();
+		System.out.println("Modifiers "+Modifier.toString(i));
+		
+	}
+}
+---------------------------------------------
+import java.lang.reflect.*;
+class A{	
+	protected static int i=10;
+	public static  double fl1 = 11.11;
+	static String name = "java";
+	
+	void m1()throws Exception{
+		A a = new A();
+		Class c = a.getClass();
+		
+		Field[] fld = c.getDeclaredFields();
+		for(Field f: fld){
+			System.out.println("Field Name "+f.getName());
+			System.out.println("Data Type "+f.getType().getName());
+			int i = f.getModifiers();
+			System.out.println("Modifier  i ="+i);
+			System.out.println("Modifier "+Modifier.toString(i));
+			System.out.println("Value "+f.get(f));
+			//System.out.println("----------");
+		}
+	}
+	
+}
+
+class FieldExample01{
+	public static void main(String[] args)throws ClassNotFoundException, Exception{
+		A a = new A();
+		a.m1();
+		
+		/*
+		Class c = a.getClass();
+		
+		Field[] fld = c.getDeclaredFields();
+		for(Field f: fld){
+			System.out.println("Field Name "+f.getName());
+			System.out.println("Data Type "+f.getType().getName());
+			int i = f.getModifiers();
+			System.out.println("Modifier "+Modifier.toString(i));
+			System.out.println("Value "+f.get(f));
+			//System.out.println("----------");
+		} */
+		
+	}
+}
+------------------------------------------------------
+import java.lang.reflect.*;
+class A{
+A(){}
+public A(int a){}
+A(String s, float f){}
+}
+class ConstructorExample01{	
+	public static void main(String[] args){
+		Class cls = A.class;		
+		Constructor[] ctr = cls.getDeclaredConstructors();
+		for(Constructor c: ctr){
+			System.out.println("Name "+c.getName());
+			int i = c.getModifiers();
+			System.out.println("Modifiers "+Modifier.toString(i));
+			Class[] cls1 = c.getParameterTypes();
+			for(Class c1: cls1){
+				System.out.println("Param "+c1.getName());
+			}
+		}
+		
+	}
+}
+------------------------------------
+class Sample1{
+	Sample1(){
+		System.out.println("Sample 1");
+	}
+}
+class Sample2{
+	Sample2(){
+		System.out.println("Sample 2");
+	}
+}
+class SampleTest{
+	public static void main(String[] args)throws Exception{
+	
+		Class.forName(args[0]).newInstance();
+		
+	}
+}
+---------------------------------------------
+import java.lang.reflect.*;
+class A{
+	void m1(){
+		System.out.println("from m1 ");
+	}
+	void m2(){
+		System.out.println("from m2 ");
+	}
+}
+	
+class DynamicMethodInvocation{
+	public static void main(String[] args)throws Exception{
+		Class c = Class.forName("A");
+		Object o = c.newInstance();
+		A a = (A)o;
+		Method m = c.getDeclaredMethod(args[0],null);//,new Class[]{int.class});
+		//m.setAccessible(true);
+		System.out.println("method name  "+m.getName());
+		m.invoke(a,null);//5
+	}
+}
+----------------------------------------------------
+
+
+jar -cvf himanshu.jar Himanshu.class
+---------------------------------------------------
+
+import java.sql.*;
+
+class OracleTest01{
+	public static void main(String[] args)throws Exception{
+
+// JDBC driver name and database URL
+   String JDBC_DRIVER =  "oracle.jdbc.driver.OracleDriver";    
+   String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE"; 
+
+   //  Database credentials
+   String USER = "system"; //system
+   String PASS = "oracle";
+   
+   //Load the driver
+     Class.forName(JDBC_DRIVER);
+
+      //Open a connection
+      System.out.println("Connecting to database...");
+      Connection con = DriverManager.getConnection(DB_URL,USER,PASS);
+	  
+	  System.out.println("CONNECTION DONE !! TNX GOD");	
+	
+	Statement st = con.createStatement();
+	String sql = "UPDATE EMP SET SALARY=2424 WHERE EMPID=101";
+	int i = st.executeUpdate(sql);
+	System.out.println("Updated "+i);
+	con.close();
+	}
+}
+-----------------------------------------------

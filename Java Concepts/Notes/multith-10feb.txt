@@ -1,0 +1,410 @@
+class MyThread implements Runnable{
+	public void run(){
+		for(int i=0;i<10;i++){
+			System.out.println("run method "+i);		
+		}
+	}
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		for(int i=0;i<10;i++){
+			System.out.println("main method "+i);		
+		}
+		MyThread mt = new MyThread();
+		Thread t1 = new Thread(mt);
+		t1.start();
+	}
+}
+---------------------------
+
+class MyThread1 implements Runnable{
+	public void run(){   //Thread 0
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			System.out.println("run method "+t.getName());		
+		}
+	}
+}
+class MyThread2 implements Runnable{
+	public void run(){
+		for(int i=0;i<7;i++){ //Thread 1
+			Thread t = Thread.currentThread();
+			System.out.println("runn method "+t.getName());		
+		}
+	}
+}
+class ThreadTest01{
+	public static void main(String[] args){
+
+		MyThread1 mt1 = new MyThread1();
+		Thread t1 = new Thread(mt1);
+		t1.start();
+		MyThread2 mt2 = new MyThread2();
+		Thread t2 = new Thread(mt2);
+		//t1.start();
+		t2.start();
+		for(int i=0;i<7;i++){
+			System.out.println("main method "+i);		
+		}
+	}
+}
+----------------------------------------------
+class MyThread1 implements Runnable{
+	public void run(){   //Thread 0
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			//t.setName("neelu");
+			System.out.println("run method "+t.getName());		
+		}
+	}
+}
+class MyThread2 implements Runnable{
+	public void run(){
+		for(int i=0;i<7;i++){ //Thread 1
+			Thread t = Thread.currentThread();
+			System.out.println("runn method "+t.getName());		
+		}
+	}
+}
+class ThreadTest01{
+	public static void main(String[] args){
+
+		MyThread1 mt1 = new MyThread1();
+		Thread t1 = new Thread(mt1,"neelu");
+		t1.start();
+		MyThread2 mt2 = new MyThread2();
+		Thread t2 = new Thread(mt2,"neelansh");
+		//t1.start();
+		t2.start();
+		for(int i=0;i<7;i++){
+			System.out.println("main method "+i);		
+		}
+	}
+}
+----------------------------------------------------
+class MyThread1 extends Thread{
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();			
+			System.out.println("run method "+t.getName());		
+		}
+	}
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.run();
+		mt1.start();
+	}
+}
+---------------------------------------------
+class MyThread1 extends Thread{
+	/*
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();			
+			System.out.println("run method "+t.getName());		
+		}
+	}
+	*/
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		
+	}
+}
+--------------------------------------------
+class MyThread1 extends Thread{
+	/*
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();			
+			System.out.println("run method "+t.getName());		
+		}
+	}
+	*/
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		mt1.start();//Exception in thread "main" java.lang.IllegalThreadStateException
+	}
+}
+--------------------------------------------------
+class MyThread1 extends Thread{	
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			t.setPriority(7);
+			System.out.println("run method "+t.getPriority());		
+		}
+	}
+	
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		}
+}
+-----------------------------------
+class MyThread1 extends Thread{	
+	public void start(){
+		System.out.println("start method ");
+	}
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			//t.setPriority(7);
+			System.out.println("run method "+t);		
+		}
+	}
+	
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		}
+}
+--------------------------------------
+class MyThread1 extends Thread{	
+	public void start(){
+		System.out.println("start method ");
+		super.start();
+	}
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			//t.setPriority(7);
+			System.out.println("run method "+t);		
+		}
+	}
+	
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		}
+}
+---------------------------------------
+
+class MyThread1 extends Thread{	
+
+	public void run(){   
+		for(int i=0;i<7;i++){
+			Thread t = Thread.currentThread();
+			t.setPriority(-7);//Exception in thread "Thread-0" java.lang.IllegalArgumentException
+			System.out.println("run method "+t);		
+		}
+	}
+	
+}
+class ThreadTest01{
+	public static void main(String[] args){
+		MyThread1 mt1 = new MyThread1();
+		mt1.start();
+		}
+}
+
+---------------------------------------
+
+class A{
+	int a,b;
+	//synchronized 
+	 void m1(int x, int y){
+		//int a,b;  these r local variables which r thread safe so we won't get inconsistent result
+		a = x;
+		b = y;
+		try{
+			Thread.sleep(1000);				
+		}catch(InterruptedException ie){}
+		int c = a+b;
+		System.out.println("Sum = "+c+" Thread ="+Thread.currentThread().getName());
+	}
+}
+
+class Thread1 extends Thread{
+	A a;
+	Thread1(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(11, 22);
+	}
+}
+
+class Thread2 extends Thread{
+	A a;
+	Thread2(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(111, 222);
+	}
+}
+
+class Synchro2{
+	public static void main(String s[]){
+		A a = new A();
+		Thread1 t1 = new Thread1(a);
+		Thread2 t2 = new Thread2(a);
+		
+		t1.start();
+		t2.start();
+		
+		t1.setName("Thread1");
+		t2.setName("Thread2");
+	}
+}
+------------------------------------------
+
+class A{
+	int a,b;
+	//synchronized 
+	synchronized void m1(int x, int y){
+		//int a,b;  these r local variables which r thread safe so we won't get inconsistent result
+		a = x;
+		b = y;
+		try{
+			Thread.sleep(1000);				
+		}catch(InterruptedException ie){}
+		int c = a+b;
+		System.out.println("Sum = "+c+" Thread ="+Thread.currentThread().getName());
+	}
+}
+
+class Thread1 extends Thread{
+	A a;
+	Thread1(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(11, 22);
+	}
+}
+
+class Thread2 extends Thread{
+	A a;
+	Thread2(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(111, 222);
+	}
+}
+
+class Synchro2{
+	public static void main(String s[]){
+		A a = new A();
+		Thread1 t1 = new Thread1(a);
+		Thread2 t2 = new Thread2(a);
+		
+		t1.start();
+		t2.start();
+		
+		t1.setName("Thread1");
+		t2.setName("Thread2");
+	}
+}
+----------------------------------------
+class A{
+	//int a,b;
+	//synchronized 
+	 void m1(int x, int y){
+		int a,b;  //these r local variables which r thread safe so we won't get inconsistent result
+		a = x;
+		b = y;
+		try{
+			Thread.sleep(1000);				
+		}catch(InterruptedException ie){}
+		int c = a+b;
+		System.out.println("Sum = "+c+" Thread ="+Thread.currentThread().getName());
+	}
+}
+
+class Thread1 extends Thread{
+	A a;
+	Thread1(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(11, 22);
+	}
+}
+
+class Thread2 extends Thread{
+	A a;
+	Thread2(A a){
+		this.a = a;
+	}
+	public void run(){
+		a.m1(111, 222);
+	}
+}
+
+class Synchro2{
+	public static void main(String s[]){
+		A a = new A();
+		Thread1 t1 = new Thread1(a);
+		Thread2 t2 = new Thread2(a);
+		
+		t1.start();
+		t2.start();
+		
+		t1.setName("Thread1");
+		t2.setName("Thread2");
+	}
+}
+-------------------------------------------------------
+class FirstClass{
+	synchronized void firstClassMethod(SecondClass sc){
+		System.out.println("From firstClassMethod of FirstClass");
+		try{
+			Thread.sleep(1000);
+		}catch(Exception e){
+			
+		}
+		sc.lastMethod();
+	}
+	synchronized void lastMethod(){
+		System.out.println("From lastMethod of FirstClass");
+	}
+}
+class SecondClass{
+	synchronized void secondClassMethod(FirstClass fc){
+		System.out.println("From secondClassMethod of SecondClass");
+		try{
+			Thread.sleep(1000);
+		}catch(Exception e){
+			
+		}
+		fc.lastMethod();		
+	}
+	synchronized void lastMethod(){
+		System.out.println("From lastMethod of SecondClass");
+	}
+}
+class DeadLockTest implements Runnable{
+	FirstClass fc = new FirstClass();
+	SecondClass sc = new SecondClass();
+	DeadLockTest(){
+		Thread t = new Thread(this, "Racing Thread");
+		t.start();
+		fc.firstClassMethod(sc); //main thread locked fc object
+		System.out.println("Back in main Thread");
+	}
+	public void run(){
+		sc.secondClassMethod(fc);// racing thread locked sc object
+		System.out.println("Back in other Thread");
+	}
+	
+	public static void main(String[] args){
+		new DeadLockTest();
+	}
+}
+-----------------------------------------------

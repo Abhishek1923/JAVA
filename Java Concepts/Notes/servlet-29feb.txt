@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>DoGetPostTest</display-name>
+  
+  <servlet>
+  	<servlet-name>first</servlet-name>
+  	<servlet-class>com.hs.test.MyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>first</servlet-name>
+  	<url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+------------------
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		String name = req.getParameter("username");
+		out.println("<h2>Hello from do GET "+name+"</h2>");		
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		String name = req.getParameter("username");
+		out.println("<h2>Hello from do POST "+name+"</h2>");
+	}
+
+	
+	
+}
+
+------------------------------------------
+<form action="test" method="post">
+	Username<input type="text" name="username"/><br>
+	<input type="submit" value="SUBMIT"/>
+</form>
+----------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+ 	<servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>com.hs.test.First</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>first</servlet-name>
+		<url-pattern>/first</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>second</servlet-name>
+		<servlet-class>com.hs.test.Second</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>second</servlet-name>
+		<url-pattern>/second</url-pattern>
+	</servlet-mapping>
+ 
+</web-app>
+----------------------------------
+
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class First extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		
+		PrintWriter out = res.getWriter();
+		RequestDispatcher rd = req.getRequestDispatcher("second");
+		out.print("<h2>Response before Dispatching</h2>");
+		//rd.forward(req, res);
+		rd.include(req, res);
+		out.print("<h2>Response after Dispatching</h2>");
+		
+	}
+
+}
+
+--------------------------------
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class Second extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		PrintWriter out = res.getWriter();
+		out.print("<h2>Response from second servlet</h2>");		
+	}
+
+}
+
+-----------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+
+	<servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>com.hs.test.First</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>first</servlet-name>
+		<url-pattern>/first</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>second</servlet-name>
+		<servlet-class>com.hs.test.Second</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>second</servlet-name>
+		<url-pattern>/second</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
+------------------------------------
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class First extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		out.print("<h2>HI...<h2>");
+		//HttpSession session = req.getSession();
+		//session.setAttribute("jse", "core-java");
+		//out.print("<a href=second>click here</a>");
+		out.print("<a href=second?jse=core-java>click here</a>");
+		
+	}	
+	
+}
+---------------------------------------------------------
+
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class Second extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		PrintWriter out = resp.getWriter();
+		//HttpSession session = req.getSession();
+		//String name = (String)session.getAttribute("jse");
+		String name = req.getParameter("jse");
+		out.print("<h2>"+name+"</h2>");
+		
+	}
+}
+
+---------------------------------------------------------------
+
+
+

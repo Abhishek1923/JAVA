@@ -1,0 +1,25 @@
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		PrintWriter out = res.getWriter();
+		ServletConfig sc = getServletConfig();
+		String name = sc.getInitParameter("name1");
+		String servletName = sc.getServletName();
+		
+		out.print("<h1>Hello TIT Bhiwani "+name+"</h1>");
+		System.out.println("Hello from console");
+	}
+
+}

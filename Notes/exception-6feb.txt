@@ -1,0 +1,316 @@
+class ExTest{
+	void m1(){
+		System.out.println("Step 1");
+		System.out.println("Step 2");
+		try{
+		int i=10/0;
+		}catch(ArithmeticException e){
+			System.out.println("Plz dont divide zero");
+		}
+		System.out.println("Step 3");
+		System.out.println("Step 4");
+		System.out.println("Step 5");
+	}
+}
+class ExceptionTest01{
+	public static void main(String[] args){
+		ExTest t1 = new ExTest();
+		t1.m1();
+	}
+}
+-----------------------------------
+
+
+
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}catch(NumberFormatException e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+----------------------------------------------
+
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}catch(NumberFormatException e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+--------------------------------------------------
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}catch(ArrayIndexOutOfBoundsException e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+-------------------------------------------------
+
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}catch(Exception e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}
+		catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+-----------------------------------------------
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}
+		System.out.println("Code bw try n catch ");
+		catch(NumberFormatException e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}
+		catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+-----------------------------------------
+class ExceptionTest01{
+	public static void main(String[] args){
+		int r=0;
+		try{
+		String s1 = args[0];
+		String s2 = args[1];
+		int no1= Integer.parseInt(s1);
+		int no2= Integer.parseInt(s2);	
+		 r = no1/no2;
+		}		
+		catch(NumberFormatException e2){
+			System.out.println("Plz provide 2 integer nos ");
+		}	
+		catch(ArrayIndexOutOfBoundsException e1){
+			System.out.println("Plz provide 2 nos ");
+		}finally{
+			System.out.println("finally block ");
+		}
+		System.out.println("Result "+r);
+	}
+}
+-----------------------------------------
+
+class ExceptionTest01{
+	public static void main(String[] args){
+		try{
+				System.out.println("Outer try ");
+				try{
+					System.out.println("Inner  try ");
+					int i=10/0;
+				}catch(NullPointerException e){
+					System.out.println("Inner  catch ");
+				}
+		}catch(Exception e){
+			System.out.println("Outer catch ");
+		}		
+		finally{
+			System.out.println("finally block ");
+		}
+		
+	}
+}
+
+---------------------------------------
+class ExceptionTest01{
+	public static void main(String[] args){
+		try{
+				System.out.println("Outer try ");
+				try{
+					System.out.println("Inner  try ");
+					int i=10/0;
+				}catch(NullPointerException e){
+					System.out.println("Inner  catch ");
+				}
+		}catch(NumberFormatException e){
+			System.out.println("Outer catch ");
+		}		
+		finally{
+			System.out.println("finally block ");
+		}
+		
+	}
+}
+------------------
+class ExceptionTest01{
+	static int m1(){
+	try{
+				System.out.println("Outer try ");
+				try{
+					System.out.println("Inner  try ");
+					int i=10/0;
+				}catch(NullPointerException e){
+					System.out.println("Inner  catch ");
+				}
+		}catch(NumberFormatException e){
+			System.out.println("Outer catch ");
+		}		
+		finally{
+			System.out.println("finally block ");
+			return 10;
+		}
+		
+		//return 10;
+	}	
+	public static void main(String[] args){
+		int n=m1();
+		System.out.println("main method  "+n);
+	}
+}
+--------------------------------------------------
+
+class ExceptionTest02{
+	static void m2()throws NullPointerException{
+		System.out.println("m2 method");
+	}
+	static void m1()throws InterruptedException{
+		System.out.println("m1 1 ");
+		Thread.sleep(1000);
+		System.out.println("m1 2 ");
+	}
+	public static void main(String[] args){
+		System.out.println("main ");
+		//m1();
+		m2();
+	}
+}
+----------------------------------------
+
+class ExceptionTest02{
+	static void m1(){
+		try{
+		System.out.println("m1 1 ");
+		//Thread.sleep(1000);
+		}catch(InterruptedException e){}
+	}
+	public static void main(String[] args){
+		System.out.println("main ");
+		//m1();Thread.sleep(1000);
+		m1();
+	}
+}
+----------------------------------------
+
+class ExceptionTest02{
+	static void m1(){
+		try{
+		System.out.println("m1 1 ");
+		//Thread.sleep(1000);
+		}catch(NullPointerException e){}
+	}
+	public static void main(String[] args){
+		System.out.println("main ");
+		//m1();Thread.sleep(1000);
+		m1();
+	}
+}
+
+------------------------------------------
+public class MultipleException{
+
+public static void main(String h[]){
+try{
+System.out.println("Step I");
+int no1 = Integer.parseInt(h[0]);
+int no2 = Integer.parseInt(h[1]);
+int result = no1/no2;
+}catch(ArithmeticException | NumberFormatException | ArrayIndexOutOfBoundsException e){
+System.out.println("Exception caught "+e.getMessage());
+e.printStackTrace();
+}catch(Exception e){
+System.out.println(" from exception");
+}
+
+System.out.println(" End of Code");
+}
+
+}
+---------------------------------------------------
+class InsufficientBalException extends Exception{
+	InsufficientBalException(){}
+	InsufficientBalException(String s){
+		super(s);
+	}
+}
+class Bank{
+	int balance=5000;
+	public int getAmount(int amount)throws InsufficientBalException{
+	if(balance<amount){
+		throw new InsufficientBalException("InsufficientBalException");
+	}
+	else{
+		balance=balance-amount;
+	}
+	return amount;
+	}
+}
+class ExceptionTest02{
+	public static void main(String[] args){
+		int amt=0;
+		Bank b = new Bank();
+		try{
+		amt = b.getAmount(6000);
+		}catch(InsufficientBalException e){
+			System.out.println("U dont have sufficient balance ");
+		}
+		System.out.println("U withdraw "+amt);
+	}
+}
+--------------------------------------------------
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+right clk
+		new
+				Dynamic web project  
+						any name
+						check box clk (for web.xml)
+						
+			Project created
+		 in case u want to generate web.xml
+		 right clk - WEB-INF
+								new
+									file 
+										web.xml
+		
+		
+		
+		server tab
+		 right clk
+				apache
+					select apache tomcat 8.5
+					
+					browse tomcat directory
+						
+						
+		src
+			right clk
+					new
+						create package
+						
+						
+		right clk on project
+			build path
+				library tab
+						add external jar
+								servlet-api.jar
+
+		
+		
+		

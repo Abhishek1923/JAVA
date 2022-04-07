@@ -1,0 +1,10 @@
+<web-app>
+	<servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>com.hs.test.MyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>first</servlet-name>
+		<url-pattern>/myurl</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,95 @@
+byte   		Byte
+short  		Short
+int 			Integer
+long 		Long
+float 		Float
+double 	Double
+char 		Character
+boolean 	Boolean
+
+
+------------------------
+
+class Test{
+	public static void main(String[] args){
+		int s1 = Integer.parseInt(args[0]);
+		int s2 = Integer.parseInt(args[1]);
+		int i = s1+s2;
+		//String s2 = args[1];
+		System.out.println("Result "+i);
+	}
+}
+------------------------------
+
+class Parent{
+	void m1(){
+		System.out.println("From m1");
+	}
+}
+class Child extends Parent{
+	void m2(){
+		System.out.println("From m2");
+		}
+}
+class Test{
+	public static void main(String[] args){
+		Parent p = new Parent();
+		p.m1();
+		p.m2();  //CTE
+		//System.out.println("Result ");
+	}
+}
+---------------------
+
+class Parent{
+	void m1(){
+		System.out.println("From m1");
+	}
+}
+class Child extends Parent{
+	void m2(){
+		System.out.println("From m2");
+		}
+}
+class Test{
+	public static void main(String[] args){
+		//Parent p = new Parent();
+		Child p = new Child();
+		p.m1();
+		p.m2();  
+		//System.out.println("Result ");
+	}
+}
+------------------------------------
+class Parent{
+	void m1(){
+		System.out.println("From m1");
+	}
+}
+class Child extends Parent{
+	void m2(){
+		System.out.println("From m2");
+		}
+}
+class Test{
+	public static void main(String[] args){
+		//Parent p = new Parent();
+		Parent p = new Child();
+		p.m1();
+		p.m2();  //CTE
+		//System.out.println("Result ");
+	}
+}
+---------------------------------------------
+
+class Test{
+	public static void main(String[] args){
+		final int x=11;
+		x=33;   //CTE
+		System.out.println("Result "+x);
+	}
+	}
+	
+------------------------------------------
+
+

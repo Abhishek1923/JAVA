@@ -1,0 +1,234 @@
+import java.util.*;
+
+class GenericTest{
+	public static void main(String[] args){
+		ArrayList<String>list = new ArrayList<String>();
+		ArrayList<Integer>list1 = new ArrayList<Integer>();
+		list.add("Java");
+		list.add("JEE");
+		list.add("Servlet");
+		list.add("Spring");
+		//list.add(44);
+		list1.add(22);
+		list1.add(12);
+		list1.add(44);
+		System.out.println(list1);
+		for(Integer i:list1){
+			System.out.println(i);
+		}
+	}
+}
+------------------------------------------------
+enum Beer{
+	Kingfisher,BeeraBoom , BeeraWhite, BeeraGrey;
+}
+class EnumTest{
+	public static void main(String[] args){
+		System.out.println("Hello Enum "+Beer.BeeraBoom);
+		Beer b[]= Beer.values();
+		for(Beer b1:b){
+			System.out.println(b1);
+		}
+	}
+}
+------------------------------------------------------
+class A{
+	void helloHi(){
+	System.out.println("Hello hi from A");
+	}
+}
+class B extends A{
+	@Override
+	void helloHi(){
+	System.out.println("Hello hi from B");
+	}
+}
+class AnnotationTest{
+	public static void main(String[] args){
+		B b = new B();
+		b.helloHi();
+	}
+}
+-------------------------------------------------------
+@FunctionalInterface
+interface Inter{
+	void m1();
+//	void m2();
+}
+class AnnotationTest{
+	public static void main(String[] args){
+		System.out.println("hello ");     //@FunctionalInterface
+	}
+}
+---------------------------------------
+@FunctionalInterface
+interface Inter{
+	void m1();
+}
+/*
+class InterImple implements Inter{
+	public void m1(){
+		System.out.println("m1 impl");
+	}
+}*/
+class LambdaTest{
+	public static void main(String[] args){
+		Inter i = ()->{System.out.println("m1 impl 1");
+			System.out.println("m1 impl 2");};
+		i.m1();
+	}
+}
+------------------------------------------------------------
+interface DefaultMethod{
+	void m1();
+	default void m2(){
+		System.out.println("Hi from Default Method");
+	}
+}
+class DefaultMethodImpl implements DefaultMethod{
+	public void m1(){
+		System.out.println("m1 method");
+	}
+	public static void main(String[] args){
+		DefaultMethod dm = new DefaultMethodImpl();
+		dm.m1();
+		dm.m2();
+	}
+}
+-------------------------------------------
+import static java.lang.System.*;   
+ 
+class StaticImportExample{  
+  public static void main(String args[]){  
+     
+   out.println("Hello");//Now no need of System.out  
+   out.println("Java");  
+  
+ }   
+}  
+-----------------------------------------------------
+class A{
+	void m1(int n){
+		System.out.println("int - argt");
+	}
+	void m1(int... n){
+		System.out.println("var - argt");
+	}
+}
+class VarArgsTest{
+	public static void main(String[] args){
+		A a = new A();
+		a.m1(); //var
+		a.m1(11);//int
+		a.m1(10,20);//var
+		a.m1('A');//int 
+	}
+}
+------------------------------------------
+class CloningTest implements Cloneable{
+	void m1(){
+		System.out.println("Hello m1 ");
+	}
+	public static void main(String[] args)throws CloneNotSupportedException{
+		CloningTest a = new CloningTest();
+		Object o = a.clone();
+		CloningTest a2 = (CloningTest)o;
+		a2.m1();
+		System.out.println("Cloning Done ");		
+	}
+}
+----------------------------
+
+
+--------------------------------
+
+
+20th feb 2020
+
+
+
+-----------------
+
+Reflection API:
+
+----------------------------------------
+class Test01{
+	public static void main(String[] args)throws Exception{
+		Class c = Test01.class;
+		Class c = getClass();
+		Class c = Class.forName("Test01");
+		
+		//Class c = new Class(); not applicable
+		System.out.println("Hello ");
+	}
+}
+--------------------------------------------
+class A{
+	static{
+		System.out.println("static block ");
+	}
+}
+class Test01{
+	public static void main(String[] args)throws Exception{
+		A a = new A();
+		Class c = Class.forName("B");		
+		//Class c = new Class(); not applicable
+		//System.out.println("Hello ");
+	}
+}
+-----------------------------------------------------------
+class A{
+	public static int a = 10;
+	int b = 20;
+}
+
+interface I1{
+	String course = "Adv Java";
+}
+
+interface I2{}
+
+public class TestApp1 extends A implements I1, I2{
+	
+	public static int i = 11;
+	static String name = "Java";
+	static float fl = 11.11F;
+	
+	public static void m1(int i, float f)throws NullPointerException{}
+	
+	String m2(String s)throws ClassCastException,ArithmeticException{
+		return "Hello";
+	}
+
+}
+---------------------------------------------
+import java.lang.reflect.*;
+
+class RefApp1{
+	public static void main(String[] args)throws Exception{
+		
+		//Class c = TestApp1.class;
+		//Class c = Class.forName("TestApp1");
+		TestApp1 t = new TestApp1();
+		Class c = t.getClass();
+		
+		String name = c.getName();
+		System.out.println("Class Name "+name);
+		
+		Class[] cls = c.getInterfaces();
+		for(Class c1: cls){
+			System.out.println("Implemented Interfaces "+c1.getName());
+		}
+		
+		Class c2 = c.getSuperclass();
+		String superClassName = c2.getName();
+		System.out.println("Superclass "+superClassName);
+		
+		int i  = c.getModifiers();
+		System.out.println("Modifier  "+Modifier.toString(i));
+		
+	}
+}
+----------------------------------------------------
+
+

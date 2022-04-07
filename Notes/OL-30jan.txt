@@ -1,0 +1,196 @@
+class App01{
+	void m1(int i){}
+	void m1(int j){}  //CTE
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		System.out.println("Happy Learning !!!");
+	}
+}
+---------------------------------------
+class App01{
+	void m1(int i){}
+	int m1(int j){}  //CTE
+}
+------------------------------
+class App01{
+	void m1(short l){
+		System.out.println("short method");
+	} 
+	void m1(int i){
+		System.out.println("int method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1(11);
+		//System.out.println("Happy Learning !!!");
+	}
+}
+---------------------------------
+
+class App01{
+	void m1(long l){
+		System.out.println("long method");
+	} 
+	void m1(char c){
+		System.out.println("char method");
+	} 
+	void m1(int i){
+		System.out.println("int method");
+	} 
+	void m1(float f){
+		System.out.println("float method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1('A');
+		//System.out.println("Happy Learning !!!");
+	}
+}
+---------------------------------------
+
+class App01{
+	void m1(float f){
+		System.out.println("float method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1('A');
+		//System.out.println("Happy Learning !!!");
+	}
+}
+--------------------------------------
+class App01{
+	void m1(long l){
+		System.out.println("long method");
+	} 
+	void m1(char c){
+		System.out.println("char method");
+	} 
+	void m1(int i){
+		System.out.println("int method");
+	} 
+	void m1(float f){
+		System.out.println("float method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1(true); //CTE
+		//System.out.println("Happy Learning !!!");
+	}
+}
+-------------------------------------
+
+class App01{
+	void m1(Object o){
+		System.out.println("Object type method");
+	} 
+	void m1(String s){
+		System.out.println("String type method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1(null);
+		//System.out.println("Happy Learning !!!");
+	}
+}
+
+--------------------------------------------
+class App01{
+	void m1(int i1, float f1){
+		System.out.println("int float method");
+	} 
+	void m1(float f2, int i2){
+		System.out.println("float int method");
+	} 
+}
+
+class OverLoadingTest{
+	public static void main(String[] args){
+		App01 a1 = new App01();
+		a1.m1(11, 11); //CTE
+		//System.out.println("Happy Learning !!!");
+	}
+}
+------------------------------------------------
+
+OVERRIDING------------------------------
+
+
+--------------------------------------------------
+
+
+
+class SuperTest{
+	void m1(){
+		System.out.println("m1 from SuperTest");
+	}
+}
+class SubTest extends SuperTest{
+	void m1(){
+		System.out.println("m1 from SubTest");
+	}
+}
+class OverRidingTest{
+	public static void main(String[] args){
+		SubTest a1 = new SubTest();
+		a1.m1();
+		//System.out.println("Happy Learning !!!");
+	}
+}
+-------------------------------------
+
+class SuperTest{
+	void m1(){
+		System.out.println("m1 from SuperTest");
+	}
+}
+class SubTest extends SuperTest{
+	protected void m1(){
+		System.out.println("m1 from SubTest");
+	}
+}
+class OverRidingTest{
+	public static void main(String[] args){
+		SuperTest a1 = new SubTest();
+		a1.m1();
+		//System.out.println("Happy Learning !!!");
+	}
+}
+-----------------------------------------
+
+
+class SuperTest{
+	static void m1(){
+		System.out.println("m1 from SuperTest");
+	}
+}
+class SubTest extends SuperTest{
+	static void m1(){
+		System.out.println("m1 from SubTest");
+	}
+}
+class OverRidingTest{
+	public static void main(String[] args){
+		SubTest a1 = new SubTest();
+		a1.m1();
+		//System.out.println("Happy Learning !!!");
+	}
+}
+-----------------------------------------

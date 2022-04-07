@@ -1,0 +1,165 @@
+interface I1{
+	void m1();
+}
+interface I2{
+	void m2();
+}
+class Impl implements I1,I2{
+	public void m1(){
+		System.out.println("m1 method");
+	}
+	public void m2(){
+		System.out.println("m2 method");
+	}
+}
+class InterfaceTest{
+	public static void main(String[] args){
+		Impl i = new Impl();
+		i.m1();
+		i.m2();
+	}
+}
+------------------------------
+
+interface I1{
+	void m1();
+}
+interface I2{
+	void m2();
+}
+interface I3 extends I1,I2{
+	
+} 
+class Impl implements I3{
+	public void m1(){
+		System.out.println("m1 method");
+	}
+	public void m2(){
+		System.out.println("m2 method");
+	}
+}
+class InterfaceTest{
+	public static void main(String[] args){
+		Impl i = new Impl();
+		i.m1();
+		i.m2();
+	}
+}
+-----------------------------------------------
+
+class Outer{
+	int x=10;
+	class Inner{
+		int y=20;
+		void m1(){
+			System.out.println("m1 from inner "+x);
+		}//m1
+	}//inner
+	//Inner i = new Inner();
+	void m2(){		
+		System.out.println("m1 from inner "+new Inner().y);
+	}
+}
+class InnerTest01{
+	public static void main(String[] args){
+		//Outer o = new Outer();
+		//o.m2();
+		Outer.Inner in = new Outer().new Inner();
+		in.m1();
+	}
+}
+-----------------------------------
+
+class Outer{
+	int x=10;
+	private class Inner{
+		int y=20;
+		void m1(){
+			System.out.println("m1 from inner "+x);
+		}//m1
+	}//inner
+	//Inner i = new Inner();
+	void m2(){		
+		System.out.println("m1 from inner "+new Inner().y);
+	}
+}
+class InnerTest01{
+	public static void main(String[] args){
+		//Outer o = new Outer();
+		//o.m2();
+		Outer.Inner in = new Outer().new Inner();
+		in.m1();
+	}
+}
+-------------------------------------------
+class Outer{
+	int x=10;
+	 class Inner{
+		static int y=20;
+		void m1(){
+			System.out.println("m1 from inner "+x);
+		}//m1
+	}//inner
+	//Inner i = new Inner();
+	void m2(){		
+		System.out.println("m1 from inner "+new Inner().y);
+	}
+}
+class InnerTest01{
+	public static void main(String[] args){
+		//Outer o = new Outer();
+		//o.m2();
+		Outer.Inner in = new Outer().new Inner();
+		in.m1();
+	}
+}
+-------------------------------------------
+class Outer{
+	int x=10;
+	static class Inner{
+		 int y=20;
+		void m1(){
+			System.out.println("m1 from inner "+new Outer().x);
+		}//m1
+	}//inner
+	//Inner i = new Inner();
+	void m2(){		
+		System.out.println("m1 from inner "+new Inner().y);
+	}
+}
+class InnerTest01{
+	public static void main(String[] args){
+		//Outer o = new Outer();
+		//o.m2();
+		Outer.Inner in = new Outer.Inner();
+		in.m1();
+	}
+}
+------------------------------------------
+
+interface I1{
+	void m1();
+}
+class AnonemousTest01{
+	public static void main(String[] args){
+		I1 i = new I1(){
+			public void m1(){
+				System.out.println("m1 implementation");
+			}
+		};
+		i.m1();
+	}
+}
+-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

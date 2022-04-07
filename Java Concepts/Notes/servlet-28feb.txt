@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <servlet>
+  	<servlet-name>paras</servlet-name>
+  	<servlet-class>com.hs.test.ServletTest</servlet-class>
+  	<init-param>
+  		<param-name>driver</param-name>
+  		<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>paras</servlet-name>
+  	<url-pattern>/first</url-pattern>
+  </servlet-mapping>
+</web-app>
+-------------------------------------------
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class ServletTest extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		
+		ServletConfig sc = getServletConfig();
+		String driver = sc.getInitParameter("driver");
+		PrintWriter out = res.getWriter();
+		out.print("<h2>Driver Name "+driver+"</h2>");
+		
+	}
+
+}
+
+---------------------------------------------------END--------------------------------------
+
+<form action="test01">
+	UserName:<input type="text" name="username"/><br>
+	Password:<input type="text" name="password"/><br>	
+	<input type="submit" value="SUBMIT"/>
+
+</form>
+
+---------------------------------
+
+package com.hs.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet01 extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		PrintWriter out = res.getWriter();
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		
+		UserAuth user = new UserAuth();
+		try {
+		boolean isAuthenticated = user.isAuthenticated(username, password);
+		if(isAuthenticated) {
+			out.print("<h2>Hello "+username+"</h2>");
+		}else {
+			out.print("<h2>Wrong Credentials</h2>");
+		}
+		}catch(Exception e) {}
+	}
+
+}
+
+---------------------
+
+package com.hs.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class UserAuth {
+	
+	public boolean isAuthenticated(String username, String password)throws Exception {
+		boolean status=false;
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","system");
+		System.out.println("Connection created");
+		String sql = "SELECT *FROM USER_DETAILS WHERE USERNAME=? AND PASSWORD=?";
+		PreparedStatement psmt = con.prepareStatement(sql);
+		psmt.setString(1, username);
+		psmt.setString(2, password);
+		ResultSet rs= psmt.executeQuery();
+		if(rs.next()) {
+			status = true;
+		}else {
+			status = false;
+		}		
+		return status;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

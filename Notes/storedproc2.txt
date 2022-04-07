@@ -1,0 +1,43 @@
+create table test02(
+eid number,
+ename varchar2(20),
+esalary number
+);
+
+-------------------------
+create or replace procedure test02_insert(
+id  number,
+name varchar2,
+sal number
+)
+as
+BEGIN
+insert into test02 values(id, name, sal);
+commit;
+END;
+/
+
+// to execute thid procedure
+
+//variable name varchar2;
+execute test02_insert(102, 'Denny', 5555);
+//print name;
+---------------------------------
+
+create or replace procedure test02_select(
+id  number,
+name OUT varchar2
+)
+as
+BEGIN
+select ename into name from test02 where eid=id;
+commit;
+END;
+/
+
+// to execute thid procedure
+
+variable name varchar2;
+execute test02_select(102, :name);
+//print name;
+

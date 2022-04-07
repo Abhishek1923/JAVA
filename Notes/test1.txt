@@ -1,0 +1,11 @@
+//attempt 1st letter of class capital
+
+Parent p=new Parent();   
+p.m1();
+
+Child c =new Child();
+c.m1();
+c.m2();
+
+Parent p=new Child();
+p.m1();  //other we get CTE
