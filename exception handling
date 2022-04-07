@@ -1,0 +1,7 @@
+an exception can be handled using try catch and finally block
+it is possible to handle multiiple excepiton using multiple catch block
+a single try block can be followed by a several catch block
+we can't write a catch without try block vbut a try block can be written without any catch 
+we can't insert statement bw try and catch
+it is possible to write a ctry block with oiin another try block called nested try block
+sometime user don't want to handle the exception then programmer can use throw /throws  

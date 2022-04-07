@@ -1,0 +1,5 @@
+What is the difference between dynamic pofymorphism and static polymorphism?
+
+Dynamic polymorphism. is the polymorphism · exhibited at runtime.· Here, Java compiler does not understand which method is called at compilatiQn time. Onry JVM decides which method is called at runtime. Method overloading and mt?thod overriding using instance methods are the examples for dynamic polymorphism.
+
+Static polymorphism is the polymorphism. exhibited at compile time. Here, Java compiler knows which method is called. Method overloading· and method overriding using static methods; method overriding using private or final methods are examples for static polymorphism.
