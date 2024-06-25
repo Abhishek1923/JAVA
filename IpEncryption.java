@@ -10,7 +10,9 @@ public class IpEncryption {
         try {
             // for production
             String secretKey = "391540f9191f4c12b0e2b89543c804bb";
-            String dataToEncrypt = "103.104.73.207:9001";
+            // String dataToEncrypt = "103.104.73.207:9001"; --prod link
+
+            String dataToEncrypt = "103.104.73.207:8999";
             // String secretKey = "391540f9191f4c12b0e2b89543c804bb";
             // String secretKey="50b30dbd2fc44eb286b7a47f5a36c296";
             
